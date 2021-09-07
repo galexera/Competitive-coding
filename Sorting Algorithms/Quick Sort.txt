@@ -1,0 +1,60 @@
+
+For Quick sort remember these steps : 
+1) finding pivot_index such that every element to left is smaller and element to right is greater than pivot
+2) Apply QS on left side of pivot
+3) Apply QS on right side of pivot
+
+Best Case Time Complexity [Big-omega]: O(n*log n)
+Average Time  Complexity [Big-theta]: O(n*log n)
+Worst Case Time Complexity [ Big-O ]: O(n2)
+
+Space Complexity : O(n*log n)
+
+
+Implementation : 
+class quicksort{
+    public static void QS(int[] arr, int start, int end)
+    {
+        if(start < end)
+        {
+            int p_index = partition(arr,start,end);
+            QS(arr,start,p_index-1 );
+            QS(arr, p_index+1,end);
+            
+        }
+
+    }
+    public static int partition(int[] arr, int start, int end)
+    {
+        int pivot = arr[end];
+        int index = start;
+        for(int i= start ; i<=end-1;i++)
+        {
+            if(arr[i] < pivot)
+            {
+                swap(arr , index , i);
+                index++;
+            }
+        }
+        swap(arr ,end,index);
+        
+
+        return index;
+    }
+    public static void swap(int[] arr,int i ,int  j)
+    {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+    public static void main(String args[])
+    {
+        int[] arr = {7,2,1,6,8,5,3,4};
+        int len = arr.length;
+        QS(arr,0,len-1);
+        for (int x : arr)
+        {
+            System.out.print(x);
+        }
+    }
+}
